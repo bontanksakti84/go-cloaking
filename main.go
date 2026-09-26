@@ -116,5 +116,5 @@ func main() {
 	}
 	
 	fmt.Printf("🚀 Cloaking Server (Local MMDB) berjalan di http://localhost:8080...\n")
-	log.Fatal(http.ListenAndServe(port, nil))
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
