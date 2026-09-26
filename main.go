@@ -6,7 +6,7 @@ import (
 	"net"
 	"net/http"
 	"strings"
-
+	"os" // Tambahkan package "os"
 	"github.com/oschwald/geoip2-golang"
 )
 
@@ -109,7 +109,12 @@ func lookupGeoIP(ipStr string) (string, error) {
 func main() {
 	http.HandleFunc("/", cloakingHandler)
 
-	port := ":8080"
+	// Ambil port dari environment variable Railway, fallback ke 8080 jika dijalankan lokal
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+	
 	fmt.Printf("🚀 Cloaking Server (Local MMDB) berjalan di http://localhost:8080...\n")
 	log.Fatal(http.ListenAndServe(port, nil))
 }
